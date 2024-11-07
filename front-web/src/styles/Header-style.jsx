@@ -8,7 +8,7 @@ const Style_header = createGlobalStyle `
         align-items: center;
         justify-content: space-between;
         height: 100vh;
-        width: 6vw;
+        width: 7vw;
         border-top-right-radius: 7.5px;
         border-bottom-right-radius: 7.5px;
     }

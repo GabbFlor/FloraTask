@@ -10,7 +10,15 @@ const Tarefas = () => {
             <Header />
 
             <main>
-                <h1>tarefasasdasdasdasdasd</h1>
+                <section className="cima">
+                    <section className="Escrita-btn-add">
+                        <h1>Tarefas</h1>
+                        
+                        <button className="btn add">
+                            Adicionar
+                        </button>
+                    </section>
+                </section>
             </main>
         </div>
     )
