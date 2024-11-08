@@ -40,7 +40,7 @@ const Home_tasks = () => {
             <Box sx={{ padding: 2, position: 'relative', overflow: 'hidden', minHeight: 100 }}>
                 {tabIndex === 0 && (
                     <Slide in={tabIndex === 0} direction={direction} timeout={500} mountOnEnter unmountOnExit>
-                        <div style={{ position: 'absolute', width: '100%' }}>
+                        <div style={{ position: 'absolute', width: '100%', backgroundColor: 'pink' }}>
                             Em progresso
                         </div>
                     </Slide>
@@ -48,7 +48,7 @@ const Home_tasks = () => {
 
                 {tabIndex === 1 && (
                     <Slide in={tabIndex === 1} direction={direction} timeout={500} mountOnEnter unmountOnExit>
-                        <div className='tab_content' style={{ position: 'absolute', width: '100%' }}>
+                        <div style={{ position: 'absolute', width: '100%', backgroundColor: '#4169E1' }}>
                             Finalizado
                         </div>
                     </Slide>
