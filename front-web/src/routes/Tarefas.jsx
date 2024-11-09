@@ -4,6 +4,10 @@ import Home_tasks from "../components/Home_tasks";
 import Style_tarefas from "../styles/Tarefas-style";
 import { BsSearch, BsFunnel } from "react-icons/bs"
 import Swal from 'sweetalert2'
+import Modal from "react-modal";
+import Style_pop_up_tarefa from "../styles/Pop-up-tarefa-style";
+
+Modal.setAppElement("#root")
 
 const Tarefas = () => {
     const [nome, setNome] = useState("");
@@ -11,22 +15,25 @@ const Tarefas = () => {
     const [tags, setTags] = useState("");
     const [prazo, setPrazo] = useState("");
     const [img, setImg] = useState(null);
+    const [formIsOpen, setFormIsOpen] = useState(false);
 
-    const handleAddTarefa = () => {
-        Swal.fire({
-            title: "Adicionar uma nova tarefa",
-            html: ``,
-            // input: "text", placeholder: "teste"
-        })
-    }
+    const openModal = () => setFormIsOpen(true);
+    const closeModal = () => setFormIsOpen(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         console.log(`Nome: ${nome}`)
-        console.log(`Nome: ${detalhes}`)
-        console.log(`Nome: ${tags}`)
-        console.log(`Nome: ${prazo}`)
+        console.log(`detalhes: ${detalhes}`)
+        console.log(`tags: ${tags}`)
+        console.log(`prazo: ${prazo}`)
+
+        setNome("")
+        setDetalhes("")
+        setTags("")
+        setPrazo("")
+
+        closeModal();
     }
 
     return (
@@ -40,7 +47,7 @@ const Tarefas = () => {
                     <section className="Escrita-btn-add">
                         <h1>Tarefas</h1>
                         
-                        <button className="btn add" onClick={() => handleAddTarefa()}>Adicionar</button>
+                        <button className="btn add" onClick={openModal}>Adicionar</button>
                     </section>
 
                     <section className="Search-section">
@@ -58,66 +65,78 @@ const Tarefas = () => {
                     <Home_tasks />
                 </section>
 
-                <form action="">
-                    <div>
-                        <label htmlFor="nome">Título:</label>
-                        <input 
-                            type="text" 
-                            className="input name" 
-                            placeholder="Digite aqui..." 
-                            name="nome" 
-                            value={nome}
-                            onChange={setNome} 
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="detalhes">Detalhes:</label>
-                        <input 
-                            type="textarea" 
-                            className="input detalhes" 
-                            placeholder="Digite aqui..." 
-                            name="detalhes" 
-                            value={detalhes}
-                            onChange={setDetalhes} 
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="tags">Tags:</label>
-                        <input 
-                            type="text" 
-                            className="input tags" 
-                            placeholder="Digite aqui..." 
-                            name="tags" 
-                            value={tags}
-                            onChange={setTags} 
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="prazo">Prazo:</label>
-                        <input 
-                            type="date" 
-                            className="input prazo" 
-                            placeholder="Digite aqui..." 
-                            name="prazo" 
-                            value={prazo}
-                            onChange={setPrazo} 
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="img">Imagem:</label>
-                        <input 
-                            type="file" 
-                            className="input img" 
-                            placeholder="Digite aqui..." 
-                            name="img" 
-                        />
-                    </div>
-                    
-                    <div>
-                        <button className="btn deletar btn-style-table">Cancelar</button>
-                        <button className="btn concluir btn-style-table">Adicionar</button>
-                    </div>
-                </form>
+                <Modal 
+                    isOpen={formIsOpen} 
+                    onRequestClose={closeModal} 
+                    contentLabel="Adicionar tarefa"
+                    className="custom-style-form-pop-up"
+                >
+                    <Style_pop_up_tarefa />
+                    <h2>Adicionar nova tarefa</h2>
+
+                    <form action="" onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor="nome">Título:</label>
+                            <input 
+                                type="text" 
+                                className="input name" 
+                                placeholder="Digite aqui..." 
+                                name="nome" 
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)} 
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="detalhes">Detalhes:</label>
+                            <textarea 
+                                type="textarea" 
+                                className="input detalhes" 
+                                placeholder="Digite aqui..." 
+                                name="detalhes" 
+                                value={detalhes}
+                                onChange={(e) => setDetalhes(e.target.value)} 
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="tags">Tags:</label>
+                            <input 
+                                type="text" 
+                                className="input tags" 
+                                placeholder="Digite aqui..." 
+                                name="tags" 
+                                value={tags}
+                                onChange={(e) => setTags(e.target.value)} 
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="prazo">Prazo:</label>
+                            <input 
+                                type="date" 
+                                className="input prazo" 
+                                placeholder="Digite aqui..." 
+                                name="prazo" 
+                                value={prazo}
+                                onChange={(e) => setPrazo(e.target.value)} 
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="img">Imagem:</label>
+                            <input 
+                                type="file" 
+                                className="input img" 
+                                placeholder="Digite aqui..." 
+                                name="img" 
+                            />
+                        </div>
+                        
+                        <div className="div-buttons">
+                            <button className="btn deletar btn-style-table" onClick={() => closeModal()}>Cancelar</button>
+                            <button className="btn concluir btn-style-table">Adicionar</button>
+                        </div>
+                    </form>
+                </Modal>
+
+                
             </main>
         </div>
     )
