@@ -13,8 +13,8 @@ const Header = () => {
             <nav>
                 <ul>
                     <li><a href="#"><img src={logo_transparente} alt="Logo transparente" className='logo-trasnparente'/> </a></li>
-                    <li><a href="#" className='icon-header' title='Home'><BsHouse /></a></li>
-                    <li><a href="#" className='icon-header' title='Tags'><BsTags /></a></li>
+                    <li><a href="/" className='icon-header' title='Home'><BsHouse /></a></li>
+                    <li><a href="/tags" className='icon-header' title='Tags'><BsTags /></a></li>
                 </ul>
             </nav>
 
