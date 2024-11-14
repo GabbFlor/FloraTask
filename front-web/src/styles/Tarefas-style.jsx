@@ -3,16 +3,20 @@ import { createGlobalStyle } from "styled-components";
 const Style_tarefas = createGlobalStyle `
     @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+    html {
+    }
+
     .Pagina-Tarefas {
         display: inline-flex;
         background-color: #F4E1DB;
         width: 100vw;
+        height: 100vh;
     }
 
     main {
         width: 100%;
         font-family: "Roboto", serif;
-        padding: 25px 100px;
+        padding: 25px 100px 0 12vw;
         display: flex;
         flex-direction: column;
         gap: 15px;

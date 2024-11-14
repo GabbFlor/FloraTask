@@ -8,9 +8,11 @@ const Style_header = createGlobalStyle `
         align-items: center;
         justify-content: space-between;
         height: 100vh;
-        width: 7vw;
+        width: 6vw;
         border-top-right-radius: 7.5px;
         border-bottom-right-radius: 7.5px;
+        position: absolute;
+        left: 0;
     }
 
     header nav ul, header nav ul a {
@@ -34,11 +36,11 @@ const Style_header = createGlobalStyle `
     }
 
     .icon-header {
-        font-size: 30px;
+        font-size: 2rem;
     }
 
     .icon-header-profile {
-        font-size: 50px;
+        font-size: 3.5rem;
     }
 `
 
