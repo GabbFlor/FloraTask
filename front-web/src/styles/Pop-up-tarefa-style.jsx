@@ -63,13 +63,17 @@ const Style_pop_up_tarefa = createGlobalStyle `
         font-family: "Roboto", serif;
     }
 
-    .custom-style-form-pop-up form div input:not(.img) {
+    .custom-style-form-pop-up form div input:not(.img), .custom-style-form-pop-up form div select {
         background-color: #D5D5D5;
         border: none;
         outline: none;
         padding: 7.5px;
         border-radius: 5px;
         color: black;
+    }
+    
+    .custom-style-form-pop-up form div select {
+        cursor: pointer;
     }
 
     .div-buttons {
@@ -85,6 +89,59 @@ const Style_pop_up_tarefa = createGlobalStyle `
     .ReactModal__Overlay--after-open {
         background-color: rgba(0, 0, 0, 0.225) !important;
         backdrop-filter: blur(5px) !important;
+    }
+
+    .div-tags {
+    /* background-color: blue; */
+    position: relative;
+    }
+
+    .button-dropdown {
+        position: relative;
+        height: 32.5px;
+        font-size: 13px;
+        color: black;
+        background-color: #D5D5D5;
+        border: none;
+        border-radius: 5px;
+        display: inline-flex;
+        align-items: center;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .dropdown-menu {
+        background-color: #D5D5D5;
+        position: absolute;
+        width: 100%;
+        top: 100%;
+        border-top: 1px solid rgb(124, 124, 124);
+    }
+
+    .dropdown-line {
+        height: 32.5px;
+        font-size: 13px;
+        cursor: pointer;
+        border-bottom: 1px solid rgb(124, 124, 124);
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+    }
+
+    .tag-color {
+        height: 17.5px;
+        width: 17.5px;
+        border-radius: 5px;
+    }
+
+    .prazo {
+        font-family: "Roboto", serif;
+        font-size: 13px;
     }
 `
 

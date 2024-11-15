@@ -2,7 +2,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Home_tasks from "../components/Home_tasks";
 import Style_tarefas from "../styles/Tarefas-style";
-import { BsSearch, BsFunnel } from "react-icons/bs"
+import { BsSearch, BsFunnel, BsCaretDownFill } from "react-icons/bs"
 import Swal from 'sweetalert2'
 import Modal from "react-modal";
 import Style_pop_up_tarefa from "../styles/Pop-up-tarefa-style";
@@ -12,10 +12,12 @@ Modal.setAppElement("#root")
 const Tarefas = () => {
     const [nome, setNome] = useState("");
     const [detalhes, setDetalhes] = useState("");
-    const [tags, setTags] = useState("");
+    const [tags, setTags] = useState(null);
     const [prazo, setPrazo] = useState("");
     const [img, setImg] = useState(null);
     const [formIsOpen, setFormIsOpen] = useState(false);
+    const [dropdownAberto, setDropdownAberto] = useState(false);
+    const [tagSelecionadas, setTagsSelecionadas] = useState("Selecione uma tag:");
 
     const openModal = () => setFormIsOpen(true);
     const closeModal = () => setFormIsOpen(false);
@@ -30,11 +32,18 @@ const Tarefas = () => {
 
         setNome("")
         setDetalhes("")
-        setTags("")
+        setTags(null)
         setPrazo("")
+        setTagsSelecionadas("Selecione uma tag:")
 
         closeModal();
     }
+
+    const tagOptions = [
+        { label: "Nenhuma", color: null, value: null },
+        { label: "Programação", color: "red", value: "programacao" },
+        { label: "Dormir", color: "yellow", value: "dormir" },
+    ]
 
     return (
         <div className="Pagina-Tarefas">
@@ -97,16 +106,30 @@ const Tarefas = () => {
                                 onChange={(e) => setDetalhes(e.target.value)} 
                             />
                         </div>
-                        <div>
+                        <div className="div-tags">
                             <label htmlFor="tags">Tags:</label>
-                            <input 
-                                type="text" 
-                                className="input tags" 
-                                placeholder="Digite aqui..." 
-                                name="tags" 
-                                value={tags}
-                                onChange={(e) => setTags(e.target.value)} 
-                            />
+                            {/* (prev) => !prev ; isso serve para quando clicar a primeira vez ele abrir, e na segunda ele fechar */}
+                            <button type="button" className="button-dropdown" onClick={() => setDropdownAberto((prev) => !prev)}>
+                                {tagSelecionadas}
+
+                                <BsCaretDownFill />
+                            </button>
+
+                            {dropdownAberto && (
+                                <section className="dropdown-menu">
+                                    {tagOptions.map((option) => (
+                                        <div key={option.value} className="dropdown-line" onClick={() => {
+                                            setDropdownAberto(false);
+                                            setTagsSelecionadas(option.label);
+                                            setTags(option.value);
+                                        }}
+                                        >
+                                            <div className="tag-color" style={{backgroundColor: option.color}}></div>
+                                            <div>{option.label}</div>
+                                        </div>
+                                    ))}
+                                </section>
+                            )}
                         </div>
                         <div>
                             <label htmlFor="prazo">Prazo:</label>
