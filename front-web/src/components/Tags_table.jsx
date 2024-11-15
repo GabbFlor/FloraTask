@@ -1,10 +1,6 @@
-import Tags_style from "../styles/Tags-style";
-
-
 const Tags_table = () => {
     return(
         <table className='table-tarefas'>
-            <Tags_style />
 
             <thead>
                 <tr>
