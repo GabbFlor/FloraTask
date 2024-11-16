@@ -1,0 +1,10 @@
+body para teste da rota "/tarefa":
+{
+    "nome": "Flora Task",
+    "detalhes": "Terminar de programar o back-end da floraTask",
+    "tags": {
+        "id": "[ID_TA_TAG]"
+    },
+    "user_id": "123456",
+    "prazo": "hoje"
+}

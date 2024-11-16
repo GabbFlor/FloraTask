@@ -10,11 +10,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Tags {
+    private String id;
+
     private String Nome;
 
     private String Descricao;
 
     private String color;
+
+    private String user_id;
 
     private String criado_em;
 }
