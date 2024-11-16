@@ -46,6 +46,10 @@ const Style_pop_up_tarefa = createGlobalStyle `
         width: 27.5vw;
     }
 
+    .add-tags form {
+        width: 20vw !important;
+    }
+
     .custom-style-form-pop-up form div:not(.div-buttons) {
         display: flex;
         flex-direction: column;

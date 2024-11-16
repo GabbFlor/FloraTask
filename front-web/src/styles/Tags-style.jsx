@@ -100,8 +100,18 @@ const Tags_style = createGlobalStyle `
         border: 2.5px solid #AE0003;
         color: #790002;
     }
+    
+    .delete-tag {
+        border: 2.5px solid #AE0003;
+        color: #790002;
+    }
 
     .delete:hover {
+        border: 2.5px solid #c30003;
+        background-color: #c80003;
+    }
+
+    .delete-tag:hover {
         border: 2.5px solid #c30003;
         background-color: #c80003;
     }
@@ -114,6 +124,21 @@ const Tags_style = createGlobalStyle `
     .editar:hover {
         border: 2.5px solid #0181a8;
         background-color: #008ab4;
+    }
+
+    .enviar-tag {
+        border: 2.5px solid #008e4e;
+        color: #007942;
+    }
+
+    .enviar-tag:hover {
+        border: 2.5px solid #00b061;
+        background-color: #00b061;
+    }
+
+    .tag-color {
+        min-width: 50px;
+        min-height: 50px;
     }
 `
 

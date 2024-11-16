@@ -7,7 +7,7 @@ import Swal from 'sweetalert2'
 import Modal from "react-modal";
 import Style_pop_up_tarefa from "../styles/Pop-up-tarefa-style";
 
-Modal.setAppElement("#root")
+Modal.setAppElement("#root");
 
 const Tarefas = () => {
     const [nome, setNome] = useState("");
@@ -25,24 +25,28 @@ const Tarefas = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(`Nome: ${nome}`)
-        console.log(`detalhes: ${detalhes}`)
-        console.log(`tags: ${tags}`)
-        console.log(`prazo: ${prazo}`)
+        if (nome && detalhes && prazo != "") {
+            console.log(`Nome: ${nome}`)
+            console.log(`detalhes: ${detalhes}`)
+            console.log(`tags: ${tags}`)
+            console.log(`prazo: ${prazo}`)
 
-        setNome("")
-        setDetalhes("")
-        setTags(null)
-        setPrazo("")
-        setTagsSelecionadas("Selecione uma tag:")
+            setNome("")
+            setDetalhes("")
+            setTags(null)
+            setPrazo("")
+            setTagsSelecionadas("Selecione uma tag:")
 
-        closeModal();
+            closeModal();
+        } else {
+            console.error("Não tente alterar o HTML para enviar valores vazios!")
+        }
     }
 
     const tagOptions = [
         { label: "Nenhuma", color: null, value: null },
-        { label: "Programação", color: "red", value: "programacao" },
-        { label: "Dormir", color: "yellow", value: "dormir" },
+        { id:"1", label: "Programação", color: "red", value: "programacao" },
+        { id:"2", label: "Dormir", color: "yellow", value: "dormir" },
     ]
 
     return (
@@ -90,7 +94,8 @@ const Tarefas = () => {
                                 type="text" 
                                 className="input name" 
                                 placeholder="Digite aqui..." 
-                                name="nome" 
+                                name="nome"
+                                required
                                 value={nome}
                                 onChange={(e) => setNome(e.target.value)} 
                             />
@@ -102,6 +107,7 @@ const Tarefas = () => {
                                 className="input detalhes" 
                                 placeholder="Digite aqui..." 
                                 name="detalhes" 
+                                required
                                 value={detalhes}
                                 onChange={(e) => setDetalhes(e.target.value)} 
                             />
@@ -138,6 +144,7 @@ const Tarefas = () => {
                                 className="input prazo" 
                                 placeholder="Digite aqui..." 
                                 name="prazo" 
+                                required
                                 value={prazo}
                                 onChange={(e) => setPrazo(e.target.value)} 
                             />
@@ -146,9 +153,9 @@ const Tarefas = () => {
                             <label htmlFor="img">Imagem:</label>
                             <input 
                                 type="file" 
-                                className="input img" 
+                                className="input img"
                                 placeholder="Digite aqui..." 
-                                name="img" 
+                                name="img"
                             />
                         </div>
                         
@@ -158,8 +165,6 @@ const Tarefas = () => {
                         </div>
                     </form>
                 </Modal>
-
-                
             </main>
         </div>
     )
