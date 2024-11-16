@@ -23,5 +23,7 @@ public class Tarefa {
 
     private String prazo;
 
+    private String criado_em;
+
 //    adicionar imagem aqui
 }
