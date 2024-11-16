@@ -68,7 +68,7 @@ public class TarefaController {
         }
     }
 
-    @GetMapping("/getByName/{nome}")
+    @GetMapping("/getByNome/{nome}")
     public ResponseEntity<List<Tarefa>> pegarTarefaPorNome(@PathVariable(value = "nome") String nome) {
         try {
             List<Tarefa> tarefaList = tarefaUseCases.getTarefaByNome(nome);
