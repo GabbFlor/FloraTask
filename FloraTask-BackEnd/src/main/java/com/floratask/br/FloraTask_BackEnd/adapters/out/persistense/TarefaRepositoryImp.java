@@ -5,6 +5,7 @@ import com.floratask.br.FloraTask_BackEnd.application.ports.out.TarefaRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,6 +50,7 @@ public class TarefaRepositoryImp implements TarefaRepository {
         tarefa.setTags(entity.getTags());
         tarefa.setUser_id(entity.getUser_id());
         tarefa.setPrazo(entity.getPrazo());
+        tarefa.setCriado_em(String.valueOf(entity.getCriado_em()));
         return tarefa;
     }
 
@@ -60,6 +62,7 @@ public class TarefaRepositoryImp implements TarefaRepository {
         entity.setTags(tarefa.getTags());
         entity.setUser_id(tarefa.getUser_id());
         entity.setPrazo(tarefa.getPrazo());
+        entity.setCriado_em(LocalDateTime.parse(tarefa.getCriado_em()));
         return entity;
     }
 }

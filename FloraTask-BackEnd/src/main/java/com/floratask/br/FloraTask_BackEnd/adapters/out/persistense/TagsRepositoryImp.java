@@ -5,6 +5,7 @@ import com.floratask.br.FloraTask_BackEnd.application.ports.out.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,6 +44,7 @@ public class TagsRepositoryImp implements TagsRepository {
         tags.setDescricao(entity.getDescricao());
         tags.setColor(entity.getColor());
         tags.setUser_id(entity.getUser_id());
+        tags.setCriado_em(String.valueOf(entity.getCriado_em()));
         return tags;
     }
 
@@ -53,6 +55,7 @@ public class TagsRepositoryImp implements TagsRepository {
         entity.setDescricao(tags.getDescricao());
         entity.setColor(tags.getColor());
         entity.setUser_id(tags.getUser_id());
+        entity.setCriado_em(LocalDateTime.parse(tags.getCriado_em()));
         return entity;
     }
 }
