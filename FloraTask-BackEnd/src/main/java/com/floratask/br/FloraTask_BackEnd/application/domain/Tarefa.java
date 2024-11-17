@@ -19,7 +19,7 @@ public class Tarefa {
 
     private TagsEntity tags;
 
-    private String user_id;
+    private String userId;
 
     private String prazo;
 

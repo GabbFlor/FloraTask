@@ -12,6 +12,8 @@ public interface TarefaRepository {
 
     List<Tarefa> findByNome(String nome);
 
+    List<Tarefa> findByUserId(String userId);
+
     Tarefa save(Tarefa tarefa);
 
     void deleteById(String id);

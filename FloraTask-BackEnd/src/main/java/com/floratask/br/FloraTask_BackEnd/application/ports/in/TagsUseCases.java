@@ -9,6 +9,8 @@ public interface TagsUseCases {
 
     Tags getOneTag(String id);
 
+    List<Tags> getTagByUserId(String userId);
+
     Tags PostTag(Tags tags);
 
     Tags updateTag(Tags tagDetails, String id);

@@ -11,6 +11,8 @@ public interface TarefaUseCases {
 
     List<Tarefa> getTarefaByNome(String nome);
 
+    List<Tarefa> getTarefaByUserId(String userId);
+
     Tarefa postTarefa(Tarefa tarefa);
 
     Tarefa updateTarefa(Tarefa tarefaDetails, String id);

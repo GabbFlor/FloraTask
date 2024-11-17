@@ -18,7 +18,7 @@ public class Tags {
 
     private String color;
 
-    private String user_id;
+    private String userId;
 
     private String criado_em;
 }

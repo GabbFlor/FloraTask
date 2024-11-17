@@ -32,6 +32,11 @@ public class TarefaRepositoryImp implements TarefaRepository {
     }
 
     @Override
+    public List<Tarefa> findByUserId(String userId) {
+        return tarefaJpaRepository.findByUserId(userId).stream().map(this::toDomain).collect(Collectors.toList());
+    }
+
+    @Override
     public Tarefa save(Tarefa tarefa) {
         TarefaEntity tarefaEntity = toEntity(tarefa);
         return toDomain(tarefaJpaRepository.save(tarefaEntity));
@@ -48,7 +53,7 @@ public class TarefaRepositoryImp implements TarefaRepository {
         tarefa.setNome(entity.getNome());
         tarefa.setDetalhes(entity.getDetalhes());
         tarefa.setTags(entity.getTags());
-        tarefa.setUser_id(entity.getUser_id());
+        tarefa.setUserId(entity.getUserId());
         tarefa.setPrazo(entity.getPrazo());
 
 //        campo para verificar o valor de "criado_em" e evitar NullPointerException
@@ -66,7 +71,7 @@ public class TarefaRepositoryImp implements TarefaRepository {
         entity.setNome(tarefa.getNome());
         entity.setDetalhes(tarefa.getDetalhes());
         entity.setTags(tarefa.getTags());
-        entity.setUser_id(tarefa.getUser_id());
+        entity.setUserId(tarefa.getUserId());
         entity.setPrazo(tarefa.getPrazo());
 
 //        campo para verificar o valor de "criado_em" e evitar NullPointerException

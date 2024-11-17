@@ -63,6 +63,21 @@ public class TagsController {
         }
     }
 
+    @GetMapping("/getByUserId/{userId}")
+    public ResponseEntity<List<Tags>> pegarTagsDoUsuario(@PathVariable(value = "userId") String userId) {
+        try {
+            List<Tags> tagsList = tagsUseCases.getTagByUserId(userId);
+
+            if (tagsList.isEmpty()) {
+                ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            return ResponseEntity.ok(tagsList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> editarTag(@PathVariable(value = "id") String id, @RequestBody Tags tagDetails) {
         try {

@@ -10,6 +10,8 @@ public interface TagsRepository {
 
     Optional<Tags> findById(String id);
 
+    List<Tags> findByUserId(String userId);
+
     Tags save(Tags tags);
 
     void deleteById(String id);

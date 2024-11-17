@@ -83,6 +83,21 @@ public class TarefaController {
         }
     }
 
+    @GetMapping("/getByUserId/{userId}")
+    public ResponseEntity<List<Tarefa>> pegarTarefasDoUsuario(@PathVariable(value = "userId") String userId) {
+        try {
+            List<Tarefa> tarefaList = tarefaUseCases.getTarefaByUserId(userId);
+
+            if (tarefaList.isEmpty()) {
+                ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            return ResponseEntity.ok(tarefaList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<?> editarTarefa(@PathVariable(value = "id") String id, @RequestBody Tarefa tarefaDetails) {
         try {

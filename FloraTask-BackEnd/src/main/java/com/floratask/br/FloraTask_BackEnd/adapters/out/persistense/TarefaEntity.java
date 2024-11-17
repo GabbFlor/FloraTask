@@ -29,8 +29,8 @@ public class TarefaEntity {
     @JoinColumn(name = "tag_id", nullable = true)
     private TagsEntity tags;
 
-    @Column(name = "user_id", nullable = false)
-    private String user_id;
+    @Column(name = "userId", nullable = false)
+    private String userId;
 
     @Column(name = "prazo", nullable = false)
     private String prazo;

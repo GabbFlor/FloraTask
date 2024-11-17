@@ -27,6 +27,11 @@ public class TagsService implements TagsUseCases {
     }
 
     @Override
+    public List<Tags> getTagByUserId(String userId) {
+        return repository.findByUserId(userId);
+    }
+
+    @Override
     public Tags PostTag(Tags tags) {
         return repository.save(tags);
     }
@@ -38,7 +43,7 @@ public class TagsService implements TagsUseCases {
         tags.setNome(tagDetails.getNome());
         tags.setDescricao(tagDetails.getDescricao());
         tags.setColor(tagDetails.getColor());
-        tags.setUser_id(tagDetails.getUser_id());
+        tags.setUserId(tagDetails.getUserId());
 
         return repository.save(tags);
     }
