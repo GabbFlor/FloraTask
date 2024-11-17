@@ -44,7 +44,13 @@ public class TagsRepositoryImp implements TagsRepository {
         tags.setDescricao(entity.getDescricao());
         tags.setColor(entity.getColor());
         tags.setUser_id(entity.getUser_id());
-        tags.setCriado_em(String.valueOf(entity.getCriado_em()));
+
+//        campo para verificar o valor de "criado_em" e evitar NullPointerException
+
+        if (entity.getCriado_em() != null) {
+            tags.setCriado_em(String.valueOf(entity.getCriado_em()));
+        }
+
         return tags;
     }
 
@@ -55,7 +61,18 @@ public class TagsRepositoryImp implements TagsRepository {
         entity.setDescricao(tags.getDescricao());
         entity.setColor(tags.getColor());
         entity.setUser_id(tags.getUser_id());
-        entity.setCriado_em(LocalDateTime.parse(tags.getCriado_em()));
+
+//        campo para verificar o valor de "criado_em" e evitar NullPointerException
+
+        if (tags.getCriado_em() != null && !tags.getCriado_em().isEmpty()) {
+            try {
+                entity.setCriado_em(LocalDateTime.parse(tags.getCriado_em()));
+            } catch (Exception e) {
+                System.err.println("Erro ao converter 'criado_em' para LocalDateTime: " + e.getMessage());
+                entity.setCriado_em(null);
+            }
+        }
+
         return entity;
     }
 }

@@ -8,3 +8,11 @@ body para teste da rota "/tarefa":
     "user_id": "123456",
     "prazo": "hoje"
 }
+
+body para teste da rota '/tags':
+{
+    "nome": "Programação",
+    "descricao": "Todas as tarefas relacionadas a programação",
+    "color": "#000000",
+    "user_id": "usuario1"
+}

@@ -50,7 +50,13 @@ public class TarefaRepositoryImp implements TarefaRepository {
         tarefa.setTags(entity.getTags());
         tarefa.setUser_id(entity.getUser_id());
         tarefa.setPrazo(entity.getPrazo());
-        tarefa.setCriado_em(String.valueOf(entity.getCriado_em()));
+
+//        campo para verificar o valor de "criado_em" e evitar NullPointerException
+
+        if (entity.getCriado_em() != null) {
+            tarefa.setCriado_em(String.valueOf(entity.getCriado_em()));
+        }
+
         return tarefa;
     }
 
@@ -62,7 +68,18 @@ public class TarefaRepositoryImp implements TarefaRepository {
         entity.setTags(tarefa.getTags());
         entity.setUser_id(tarefa.getUser_id());
         entity.setPrazo(tarefa.getPrazo());
-        entity.setCriado_em(LocalDateTime.parse(tarefa.getCriado_em()));
+
+//        campo para verificar o valor de "criado_em" e evitar NullPointerException
+
+        if (tarefa.getCriado_em() != null && tarefa.getCriado_em().isEmpty()) {
+            try {
+                entity.setCriado_em(LocalDateTime.parse(tarefa.getCriado_em()));
+            } catch (Exception e) {
+                System.err.println("Erro ao converter 'criado_em' para LocalDateTime: " + e.getMessage());
+                entity.setCriado_em(null);
+            }
+        }
+
         return entity;
     }
 }
