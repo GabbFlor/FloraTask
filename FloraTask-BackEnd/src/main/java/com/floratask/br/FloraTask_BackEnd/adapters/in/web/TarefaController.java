@@ -37,6 +37,7 @@ public class TarefaController {
         }
     }
 
+//    pegar apenas uma tarefa pelo id dela
     @GetMapping("/getById/{id}")
     public ResponseEntity<?> pegarTarefaPorId(@PathVariable(value = "id") String id) {
         try {
@@ -53,6 +54,7 @@ public class TarefaController {
         }
     }
 
+//    barra de pesquisa - pesquisar todas as tarefas com tal nome de tal usuário
     @GetMapping("/getByNome/{nome}/userId/{userId}")
     public ResponseEntity<List<Tarefa>> pegarTarefaPorNome(@PathVariable(value = "nome") String nome, @PathVariable(value = "userId") String userId) {
         try {
@@ -68,6 +70,7 @@ public class TarefaController {
         }
     }
 
+//    pegar todas as tarefas de um determinado usuário
     @GetMapping("/getByUserId/{userId}")
     public ResponseEntity<List<Tarefa>> pegarTarefasDoUsuario(@PathVariable(value = "userId") String userId) {
         try {
