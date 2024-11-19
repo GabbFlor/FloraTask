@@ -37,21 +37,6 @@ public class TarefaController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<Tarefa>> listarTodasTarefas() {
-        try {
-            List<Tarefa> tarefaList = tarefaUseCases.getAllTarefas();
-
-            if (tarefaList.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-            }
-
-            return ResponseEntity.ok(tarefaList);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
     @GetMapping("/getById/{id}")
     public ResponseEntity<?> pegarTarefaPorId(@PathVariable(value = "id") String id) {
         try {
@@ -68,12 +53,27 @@ public class TarefaController {
         }
     }
 
-    @GetMapping("/getByNome/{nome}")
-    public ResponseEntity<List<Tarefa>> pegarTarefaPorNome(@PathVariable(value = "nome") String nome) {
+    @GetMapping("/getByNome/{nome}/userId/{userId}")
+    public ResponseEntity<List<Tarefa>> pegarTarefaPorNome(@PathVariable(value = "nome") String nome, @PathVariable(value = "userId") String userId) {
         try {
-            List<Tarefa> tarefaList = tarefaUseCases.getTarefaByNome(nome);
+            List<Tarefa> tarefaList = tarefaUseCases.getTarefaByNome(nome, userId);
 
             if(tarefaList.isEmpty()) {
+                ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            return ResponseEntity.ok(tarefaList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    @GetMapping("/getByUserId/{userId}")
+    public ResponseEntity<List<Tarefa>> pegarTarefasDoUsuario(@PathVariable(value = "userId") String userId) {
+        try {
+            List<Tarefa> tarefaList = tarefaUseCases.getTarefaByUserId(userId);
+
+            if (tarefaList.isEmpty()) {
                 ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
             }
 
@@ -99,10 +99,10 @@ public class TarefaController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, String>> deleteTarefa(@PathVariable(value = "id") String id) {
+    @DeleteMapping("/{userId}/{id}")
+    public ResponseEntity<Map<String, String>> deleteTarefa(@PathVariable(value = "id") String id, @PathVariable(value = "userId") String userId) {
         try {
-            List<Tarefa> todasTarefas = tarefaUseCases.getAllTarefas();
+            List<Tarefa> todasTarefas = tarefaUseCases.getTarefaByUserId(userId);
 
             boolean idExiste = todasTarefas.stream().anyMatch(tarefa -> tarefa.getId().equals(id));
 

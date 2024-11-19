@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TagsRepository {
-    List<Tags> findAll();
-
     Optional<Tags> findById(String id);
+
+    List<Tags> findByUserId(String userId);
 
     Tags save(Tags tags);
 

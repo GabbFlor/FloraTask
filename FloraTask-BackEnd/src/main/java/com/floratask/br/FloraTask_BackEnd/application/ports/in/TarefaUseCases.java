@@ -5,11 +5,11 @@ import com.floratask.br.FloraTask_BackEnd.application.domain.Tarefa;
 import java.util.List;
 
 public interface TarefaUseCases {
-    List<Tarefa> getAllTarefas();
-
     Tarefa getTarefaById(String id);
 
-    List<Tarefa> getTarefaByNome(String nome);
+    List<Tarefa> getTarefaByNome(String nome, String userId);
+
+    List<Tarefa> getTarefaByUserId(String userId);
 
     Tarefa postTarefa(Tarefa tarefa);
 

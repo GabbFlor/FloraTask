@@ -4,9 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface TarefaJpaRepository extends JpaRepository<TarefaEntity, String> {
-    List<TarefaEntity> findByNomeContainingIgnoreCase(String nome);
+    List<TarefaEntity> findByNomeContainingIgnoreCaseAndUserId(String nome, String userId);
+
+    List<TarefaEntity> findByUserId(String userId);
 }

@@ -5,9 +5,9 @@ import com.floratask.br.FloraTask_BackEnd.application.domain.Tags;
 import java.util.List;
 
 public interface TagsUseCases {
-    List<Tags> getAllTags();
-
     Tags getOneTag(String id);
+
+    List<Tags> getTagByUserId(String userId);
 
     Tags PostTag(Tags tags);
 

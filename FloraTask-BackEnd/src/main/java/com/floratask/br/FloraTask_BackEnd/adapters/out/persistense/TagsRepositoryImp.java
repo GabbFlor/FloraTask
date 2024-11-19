@@ -17,13 +17,13 @@ public class TagsRepositoryImp implements TagsRepository {
     private TagsJpaRepository tagsJpaRepository;
 
     @Override
-    public List<Tags> findAll() {
-        return tagsJpaRepository.findAll().stream().map(this::toDomain).collect(Collectors.toList());
+    public Optional<Tags> findById(String id) {
+        return tagsJpaRepository.findById(id).map(this::toDomain);
     }
 
     @Override
-    public Optional<Tags> findById(String id) {
-        return tagsJpaRepository.findById(id).map(this::toDomain);
+    public List<Tags> findByUserId(String userId) {
+        return tagsJpaRepository.findByUserId(userId).stream().map(this::toDomain).collect(Collectors.toList());
     }
 
     @Override
@@ -43,7 +43,7 @@ public class TagsRepositoryImp implements TagsRepository {
         tags.setNome(entity.getNome());
         tags.setDescricao(entity.getDescricao());
         tags.setColor(entity.getColor());
-        tags.setUser_id(entity.getUser_id());
+        tags.setUserId(entity.getUserId());
 
 //        campo para verificar o valor de "criado_em" e evitar NullPointerException
 
@@ -60,7 +60,7 @@ public class TagsRepositoryImp implements TagsRepository {
         entity.setNome(tags.getNome());
         entity.setDescricao(tags.getDescricao());
         entity.setColor(tags.getColor());
-        entity.setUser_id(tags.getUser_id());
+        entity.setUserId(tags.getUserId());
 
 //        campo para verificar o valor de "criado_em" e evitar NullPointerException
 

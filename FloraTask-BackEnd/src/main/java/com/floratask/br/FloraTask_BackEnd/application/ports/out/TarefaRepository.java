@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TarefaRepository {
-    List<Tarefa> findAll();
-
     Optional<Tarefa> findById(String id);
 
-    List<Tarefa> findByNome(String nome);
+    List<Tarefa> findByNome(String nome, String userId);
+
+    List<Tarefa> findByUserId(String userId);
 
     Tarefa save(Tarefa tarefa);
 

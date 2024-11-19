@@ -1,18 +1,18 @@
-body para teste da rota "/tarefa":
-{
-    "nome": "Flora Task",
-    "detalhes": "Terminar de programar o back-end da floraTask",
-    "tags": {
-        "id": "[ID_TA_TAG]"
+[
+    {
+        "nome": "Flora Task",
+        "detalhes": "Terminar de programar o back-end da floraTask",
+        "tags": {
+            "id": "[ID_TA_TAG]"
+        },
+        "userId": "usuario1",
+        "prazo": "hoje"
     },
-    "user_id": "123456",
-    "prazo": "hoje"
-}
 
-body para teste da rota '/tags':
-{
-    "nome": "Programação",
-    "descricao": "Todas as tarefas relacionadas a programação",
-    "color": "#000000",
-    "user_id": "usuario1"
-}
+    {
+        "nome": "Programação",
+        "descricao": "Todas as tarefas relacionadas a programação",
+        "color": "#000000",
+        "userId": "usuario1"
+    }
+]

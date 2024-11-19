@@ -28,8 +28,8 @@ public class TagsEntity {
     @Column(name = "color", nullable = false)
     private String color;
 
-    @Column(name = "user_id", nullable = false)
-    private String user_id;
+    @Column(name = "userId", nullable = false)
+    private String userId;
 
     @CreationTimestamp
     @Column(updatable = false)

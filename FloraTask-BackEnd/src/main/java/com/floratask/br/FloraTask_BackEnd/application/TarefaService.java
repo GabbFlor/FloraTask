@@ -2,7 +2,6 @@ package com.floratask.br.FloraTask_BackEnd.application;
 
 import com.floratask.br.FloraTask_BackEnd.application.domain.Tarefa;
 import com.floratask.br.FloraTask_BackEnd.application.ports.in.TarefaUseCases;
-import com.floratask.br.FloraTask_BackEnd.application.ports.out.TagsRepository;
 import com.floratask.br.FloraTask_BackEnd.application.ports.out.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,19 +16,19 @@ public class TarefaService implements TarefaUseCases {
     private TarefaRepository tarefaRepository;
 
     @Override
-    public List<Tarefa> getAllTarefas() {
-        return tarefaRepository.findAll();
-    }
-
-    @Override
     public Tarefa getTarefaById(String id) {
         return tarefaRepository.findById(id).orElseThrow(() ->
                 new NoSuchElementException("Tarefa com o id: " + id + " não foi encontrada."));
     }
 
     @Override
-    public List<Tarefa> getTarefaByNome(String nome) {
-        return tarefaRepository.findByNome(nome);
+    public List<Tarefa> getTarefaByNome(String nome, String userId) {
+        return tarefaRepository.findByNome(nome, userId);
+    }
+
+    @Override
+    public List<Tarefa> getTarefaByUserId(String userId) {
+        return tarefaRepository.findByUserId(userId);
     }
 
     @Override

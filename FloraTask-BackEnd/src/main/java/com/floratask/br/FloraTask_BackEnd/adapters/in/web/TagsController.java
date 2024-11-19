@@ -32,22 +32,7 @@ public class TagsController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<Tags>> listar() {
-        try {
-            List<Tags> tagsList = tagsUseCases.getAllTags();
-
-            if (tagsList.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-            }
-
-            return ResponseEntity.ok(tagsList);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
-
-    @GetMapping("/{id}")
+    @GetMapping("/getTagById/{id}")
     public ResponseEntity<?> pegarTagPorId(@PathVariable(value = "id") String id) {
         try {
             Tags tags = tagsUseCases.getOneTag(id);
@@ -60,6 +45,21 @@ public class TagsController {
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("Mensagem: ", "Erro interno no servidor: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        }
+    }
+
+    @GetMapping("/getByUserId/{userId}")
+    public ResponseEntity<List<Tags>> pegarTagsDoUsuario(@PathVariable(value = "userId") String userId) {
+        try {
+            List<Tags> tagsList = tagsUseCases.getTagByUserId(userId);
+
+            if (tagsList.isEmpty()) {
+                ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            return ResponseEntity.ok(tagsList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 
@@ -79,10 +79,10 @@ public class TagsController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, String>> deleteTag(@PathVariable(value = "id") String id) {
+    @DeleteMapping("/{userId}/{id}")
+    public ResponseEntity<Map<String, String>> deleteTag(@PathVariable(value = "id") String id, @PathVariable(value = "userId") String userId) {
         try {
-            List<Tags> todasTags = tagsUseCases.getAllTags();
+            List<Tags> todasTags = tagsUseCases.getTagByUserId(userId);
 
             boolean idExiste = todasTags.stream().anyMatch(tags -> tags.getId().equals(id));
 
