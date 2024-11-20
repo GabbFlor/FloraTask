@@ -1,11 +1,12 @@
 import Logo from "../assets/Logo_circular.png"
 import Form_registro from "../components/Form_registro";
-import '../styles/teste.css'
 import { Link } from "react-router-dom";
+import Style_login_registro from "../styles/Login-registro";
 
 const Registro = () => {
     return(
         <div className="Pagina-registro">
+            <Style_login_registro />
             <section className="section-entire-form">
                 <section className="left-form">
                     <img src={Logo} alt="Logo-Flora-Task" />

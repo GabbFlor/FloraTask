@@ -137,7 +137,7 @@ const Form_registro = () => {
                 {verificPassword == true ? (
                     <label htmlFor="verificação" style={{color: "blue"}}>As senhas coincidem</label>
                 ) : verificPassword == false ? (
-                    <label htmlFor="verificação" style={{color: "red"}}>As senhas não coincidem</label>
+                    <label htmlFor="verificação" style={{color: "#750101"}}>As senhas não coincidem</label>
                 ) : ""}
             </div>
             

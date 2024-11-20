@@ -3,6 +3,7 @@ import logo_transparente from '../assets/Logo-transparente.png'
 import { BsHouse } from "react-icons/bs";
 import { BsTags } from "react-icons/bs";
 import { BsPersonCircle } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -19,7 +20,7 @@ const Header = () => {
             </nav>
 
             <section>
-                <p><a href="#" className='icon-header-profile' title='Perfil'><BsPersonCircle /></a></p>
+                <p><Link to="/auth/login" className='icon-header-profile' title='Perfil'><BsPersonCircle /></Link></p>
             </section>
         </header>
     )
