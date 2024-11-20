@@ -24,14 +24,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     @Autowired
     UsersJpaRepository repository;
 
-    private String recoverToken(HttpServletRequest request) {
-        var authHeader = request.getHeader("Authorization");
-
-        if(authHeader == null) return null;
-
-        return authHeader.replace("Bearer ", "");
-    }
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var token = this.recoverToken(request);
@@ -46,5 +38,13 @@ public class SecurityFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
+    }
+
+    private String recoverToken(HttpServletRequest request) {
+        var authHeader = request.getHeader("Authorization");
+
+        if(authHeader == null) return null;
+
+        return authHeader.replace("Bearer ", "");
     }
 }

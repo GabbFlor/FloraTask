@@ -14,5 +14,11 @@
         "descricao": "Todas as tarefas relacionadas a programação",
         "color": "#000000",
         "userId": "usuario1"
+    },
+    {
+        "email": "gabrielflorindoduarte@gmail.com",
+        "nome": "Gabriel Florindo Duarte de Souza",
+        "password": "teste123",
+        "role": "USER"
     }
 ]
