@@ -1,11 +1,11 @@
-import Form_login from "../components/Form_login";
 import Logo from "../assets/Logo_circular.png"
+import Form_registro from "../components/Form_registro";
 import '../styles/teste.css'
 import { Link } from "react-router-dom";
 
-const Login = () => {
-    return (
-        <div className="Pagina-login">
+const Registro = () => {
+    return(
+        <div className="Pagina-registro">
             <section className="section-entire-form">
                 <section className="left-form">
                     <img src={Logo} alt="Logo-Flora-Task" />
@@ -13,18 +13,18 @@ const Login = () => {
                     <div className="left-escrita">
                         <h1>Bem vindo a <br /> FloraTask!</h1>
 
-                        <p>Não tem uma conta? <br /> Crie agora mesmo!</p>
+                        <p>Já tem uma conta? <br /> Entre agora mesmo!</p>
                     </div>
 
                     <div>
-                        <Link to="/auth/registro">Criar conta!</Link>
+                        <Link to="/auth/login">Entrar!</Link>
                     </div>
                 </section>
 
-                <Form_login />
+                <Form_registro />
             </section>
         </div>
     )
 }
 
-export default Login;
+export default Registro;

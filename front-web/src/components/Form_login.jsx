@@ -43,7 +43,7 @@ const Form_login = () => {
                 <div className='div-input'>
                     <label htmlFor="email">Email:</label>
                     <input 
-                        type="text" 
+                        type="email" 
                         name="email" 
                         placeholder='Digite aqui...'
                         value={email}

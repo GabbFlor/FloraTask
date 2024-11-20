@@ -7,7 +7,7 @@
     margin: 0;
 }
 
-.Pagina-login {
+.Pagina-login, .Pagina-registro {
     background-color: #F4E1DB;
     width: 100vw;
     height: 100vh;
@@ -34,7 +34,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    gap: 25px;
     border-radius: 10px 0 0 10px;
 }
 
@@ -52,7 +53,7 @@
     font-weight: 500;
 }
 
-.left-form div button {
+.left-form div a {
     background-color: transparent;
     padding: 5px;
     font-size: 0.95rem;
@@ -65,9 +66,10 @@
     cursor: pointer;
     font-size: 1rem;
     transition: border 0.3s, color 0.3s, background-color 0.3s;
+    text-decoration: none;
 }
 
-.left-form div button:hover {
+.left-form div a:hover {
     background-color: #356660;
     color: white;
     transition: border 0.3s, color 0.3s, background-color 0.3s;
@@ -160,4 +162,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+}
+
+.btn-form-registro {
+    margin-top: 15px;
 }
