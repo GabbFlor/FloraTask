@@ -216,6 +216,21 @@ const Style_tarefas = createGlobalStyle `
     .container-box-tabs::-webkit-scrollbar-track {
         background-color: transparent;
     }
+
+    .tag-td {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        // background-color: red;
+        gap: 10px;
+    }
+
+    .tag-color {
+        height: 20px;
+        width: 20px;
+        border-radius: 5px;
+    }
 `
 
 export default Style_tarefas;

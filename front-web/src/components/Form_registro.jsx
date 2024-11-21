@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { BsLock, BsUnlock } from 'react-icons/bs';
+import Swal from 'sweetalert2';
 
 const Form_registro = () => {
     const [typePassword, setTypePassword] = useState("password");
@@ -50,10 +52,29 @@ const Form_registro = () => {
         e.preventDefault();
 
         if (email && password != "") {
-            console.log(`Nome: ${nome}`);
-            console.log(`Email: ${email}`);
-            console.log(`Senha: ${password}`);
-            console.log(`Confirmação de senha: ${passwordConfirm}`)
+            axios.post('http://localhost:8080/auth/registro', {
+                email: email,
+                nome: nome,
+                password: password,
+                role: role
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Sucesso",
+                        text: `Bem vindo ${nome}`,
+                        timer: 1500
+                    })
+                    .then(() => {
+                        const token = response.data.token;
+
+                        localStorage.setItem("token", token);
+
+                        window.location.href = '/'
+                    })
+                }
+            })
 
             setNome("")
             setEmail("");

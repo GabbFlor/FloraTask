@@ -68,8 +68,8 @@ public class AuthorizationController {
     public ResponseEntity registro(@RequestBody @Valid RegistroDTO data) {
         try {
             String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-            System.out.println("Senha original: " + data.password());
-            System.out.println("Senha encriptada: " + encryptedPassword);
+//            System.out.println("Senha original: " + data.password());
+//            System.out.println("Senha encriptada: " + encryptedPassword);
             UsersEntity newUser = new UsersEntity(data.email(), data.nome(), encryptedPassword, data.role());
 
             this.usersJpaRepository.save(newUser);
@@ -103,7 +103,7 @@ public class AuthorizationController {
 
             Users users = usersUseCase.getOneUser(login);
 
-            UsersInfoDTO userResponse = new UsersInfoDTO(users.getEmail(), users.getNome(), users.getRole());
+            UsersInfoDTO userResponse = new UsersInfoDTO(users.getId(), users.getEmail(), users.getNome(), users.getRole());
 
             return ResponseEntity.status(HttpStatus.OK).body(userResponse);
         } catch (NoSuchElementException e) {
