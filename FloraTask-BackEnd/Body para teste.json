@@ -6,7 +6,8 @@
             "id": "[ID_TA_TAG]"
         },
         "userId": "usuario1",
-        "prazo": "hoje"
+        "prazo": "hoje",
+        "isCompleted": false
     },
 
     {

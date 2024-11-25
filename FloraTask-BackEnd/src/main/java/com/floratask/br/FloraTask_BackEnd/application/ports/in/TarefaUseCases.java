@@ -9,7 +9,9 @@ public interface TarefaUseCases {
 
     List<Tarefa> getTarefaByNome(String nome, String userId);
 
-    List<Tarefa> getTarefaByUserId(String userId);
+    List<Tarefa> getTarefaCompletedByUserId(String userId);
+
+    List<Tarefa> getTarefaIncompletedByUserId(String userId);
 
     Tarefa postTarefa(Tarefa tarefa);
 

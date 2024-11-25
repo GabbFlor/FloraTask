@@ -35,6 +35,9 @@ public class TarefaEntity {
     @Column(name = "prazo", nullable = false)
     private String prazo;
 
+    @Column(name = "isCompleted", nullable = false, columnDefinition = "boolean default false")
+    private Boolean isCompleted = false;
+
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime criado_em;

@@ -9,5 +9,7 @@ import java.util.List;
 public interface TarefaJpaRepository extends JpaRepository<TarefaEntity, String> {
     List<TarefaEntity> findByNomeContainingIgnoreCaseAndUserId(String nome, String userId);
 
-    List<TarefaEntity> findByUserId(String userId);
+    List<TarefaEntity> findByUserIdAndIsCompletedTrue(String userId);
+
+    List<TarefaEntity> findByUserIdAndIsCompletedFalse(String userId);
 }

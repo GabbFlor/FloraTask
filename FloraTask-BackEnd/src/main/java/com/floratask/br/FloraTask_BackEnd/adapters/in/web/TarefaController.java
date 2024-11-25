@@ -70,11 +70,27 @@ public class TarefaController {
         }
     }
 
-//    pegar todas as tarefas de um determinado usuário
-    @GetMapping("/getByUserId/{userId}")
-    public ResponseEntity<List<Tarefa>> pegarTarefasDoUsuario(@PathVariable(value = "userId") String userId) {
+//    pegar todas as tarefas completas de um determinado usuário
+    @GetMapping("/getCompletedByUserId/{userId}")
+    public ResponseEntity<List<Tarefa>> pegarTarefasCompletadasDoUsuario(@PathVariable(value = "userId") String userId) {
         try {
-            List<Tarefa> tarefaList = tarefaUseCases.getTarefaByUserId(userId);
+            List<Tarefa> tarefaList = tarefaUseCases.getTarefaCompletedByUserId(userId);
+
+            if (tarefaList.isEmpty()) {
+                ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+            }
+
+            return ResponseEntity.ok(tarefaList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+    //    pegar todas as tarefas incompletas de um determinado usuário
+    @GetMapping("/getIncompletedByUserId/{userId}")
+    public ResponseEntity<List<Tarefa>> pegarTarefasIncompletasDoUsuario(@PathVariable(value = "userId") String userId) {
+        try {
+            List<Tarefa> tarefaList = tarefaUseCases.getTarefaIncompletedByUserId(userId);
 
             if (tarefaList.isEmpty()) {
                 ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
@@ -105,7 +121,7 @@ public class TarefaController {
     @DeleteMapping("/{userId}/{id}")
     public ResponseEntity<Map<String, String>> deleteTarefa(@PathVariable(value = "id") String id, @PathVariable(value = "userId") String userId) {
         try {
-            List<Tarefa> todasTarefas = tarefaUseCases.getTarefaByUserId(userId);
+            List<Tarefa> todasTarefas = tarefaUseCases.getTarefaCompletedByUserId(userId);
 
             boolean idExiste = todasTarefas.stream().anyMatch(tarefa -> tarefa.getId().equals(id));
 

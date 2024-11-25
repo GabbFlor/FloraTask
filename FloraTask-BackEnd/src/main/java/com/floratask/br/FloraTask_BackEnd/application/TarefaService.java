@@ -27,8 +27,13 @@ public class TarefaService implements TarefaUseCases {
     }
 
     @Override
-    public List<Tarefa> getTarefaByUserId(String userId) {
-        return tarefaRepository.findByUserId(userId);
+    public List<Tarefa> getTarefaCompletedByUserId(String userId) {
+        return tarefaRepository.findCompletedByUserId(userId);
+    }
+
+    @Override
+    public List<Tarefa> getTarefaIncompletedByUserId(String userId) {
+        return tarefaRepository.findIncompletedByUserId(userId);
     }
 
     @Override

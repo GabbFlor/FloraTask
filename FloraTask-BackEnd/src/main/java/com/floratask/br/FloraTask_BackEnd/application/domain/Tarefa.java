@@ -23,6 +23,8 @@ public class Tarefa {
 
     private String prazo;
 
+    private Boolean isCompleted = false;
+
     private String criado_em;
 
 //    adicionar imagem aqui

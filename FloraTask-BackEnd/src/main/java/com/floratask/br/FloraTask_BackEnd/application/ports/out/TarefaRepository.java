@@ -10,7 +10,9 @@ public interface TarefaRepository {
 
     List<Tarefa> findByNome(String nome, String userId);
 
-    List<Tarefa> findByUserId(String userId);
+    List<Tarefa> findCompletedByUserId(String userId);
+
+    List<Tarefa> findIncompletedByUserId(String userId);
 
     Tarefa save(Tarefa tarefa);
 
