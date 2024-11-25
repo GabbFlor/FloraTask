@@ -74,6 +74,27 @@ const Form_registro = () => {
                         window.location.href = '/'
                     })
                 }
+            }).catch(error => {
+                if(error.response && error.response.status === 409) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro",
+                        text: `Esse email já está sendo utilizado.`,
+                        timer: 1500
+                    })
+
+                    setNome("")
+                    setEmail("")
+                    setPassword("")
+                    setPasswordConfirm("")
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro",
+                        text: `Erro interno no servidor: ${error.message}`,
+                        timer: 1500
+                    })
+                }
             })
 
             setNome("")

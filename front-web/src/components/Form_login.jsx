@@ -1,5 +1,7 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { BsLock, BsUnlock } from 'react-icons/bs';
+import Swal from 'sweetalert2';
 
 const Form_login = () => {
     const [typePassword, setTypePassword] = useState("password");
@@ -22,11 +24,46 @@ const Form_login = () => {
         e.preventDefault();
 
         if (email && password != "") {
-            console.log(`Email: ${email}`);
-            console.log(`Senha: ${password}`);
+            axios.post('http://localhost:8080/auth/login', {
+                email: email,
+                password: password
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Sucesso",
+                        text: `Seja bem vindo ao FloraTask!`,
+                        timer: 1500
+                    })
+                    .then(() => {
+                        const token = response.data.token;
 
-            setEmail("");
-            setPassword("");
+                        localStorage.setItem("token", token);
+
+                        window.location.href = '/'
+                    })
+                }
+            }).catch(error => {
+                if(error.response && error.response.status === 401) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro",
+                        text: `Email ou senha incorretos.`,
+                        timer: 1500
+                    })
+
+                    setEmail("")
+                    setPassword("")
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro",
+                        text: `Erro interno no servidor: ${error.message}`,
+                        timer: 1500
+                    })
+                }
+            })
         } else {
             console.error("Não tente mudar o site no inspecionar para enviar valores vazios!")
         }
