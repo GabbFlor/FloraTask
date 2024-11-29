@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Tags_table from "../components/Tags_table";
 import Tags_style from "../styles/Tags-style";
 import Modal from "react-modal";
 import Style_pop_up_tarefa from "../styles/Pop-up-tarefa-style";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 Modal.setAppElement("#root");
 
@@ -12,22 +14,88 @@ const Tags = () => {
     const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
     const [tagColor, setTagColor] = useState("#000000");
+    const [userInfo, setUserInfo] = useState([])
 
     const openModal = () => setFormIsOpen(true);
     const closeModal = () => setFormIsOpen(false);
+
+    useEffect(() => {
+        const pegarUserInfo = async () => {
+            const token = localStorage.getItem("token");
+
+            try {
+                const response = await axios.get('http://localhost:8080/auth/info', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                if(response.status === 200) {
+                    setUserInfo(response.data);
+                } else {
+                    console.log("Erro desconhecido")
+                }
+            } catch (error) {
+                if (error.response.status === 403) {
+                    window.location.href = '/auth/login';
+                } else {
+                    console.error(`Erro interno no servidor: ${error.message}`)
+                }
+            }
+        }
+
+        pegarUserInfo();
+    }, [])
 
     const HandleSubmit = (e) => {
         e.preventDefault();
 
         if (nome && descricao && tagColor != "") {
-            console.log(`Nome: ${nome}`)
-            console.log(`Descrição: ${descricao}`)
-            console.log(`Cor da tag: ${tagColor}`)
+            const token = localStorage.getItem("token");
 
-            setNome("")
-            setDescricao("")
-            setTagColor("#000000");
-
+            axios.post("http://localhost:8080/tags", {
+                    nome: nome,
+                    descricao: descricao,
+                    color: tagColor,
+                    userId: userInfo.id
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            .then(response => {
+                if (response.status === 201) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Sucesso!",
+                        text: `A tag "${nome}" foi adicionada com sucesso!`,
+                        timer: 1500
+                    })
+                    .then(() => {
+                        setNome("")
+                        setDescricao("")
+                        setTagColor("#000000");
+                    })
+                    .catch(error => {
+                        if (error.response && error.response.status === 403) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Erro!",
+                                text: `Você não tem permissão para adicionar tags!`,
+                                timer: 1500
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Erro!",
+                                text: `Erro interno no servidor: ${error.message}`,
+                            })
+                        }
+                    })
+                }
+            })
             closeModal();
         } else {
             console.error("Não tente alterar o HTML para enviar valores vazios!")

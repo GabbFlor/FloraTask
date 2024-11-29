@@ -135,10 +135,12 @@ const Tags_style = createGlobalStyle `
         border: 2.5px solid #00b061;
         background-color: #00b061;
     }
-
+    
     .tag-color {
-        min-width: 50px;
-        min-height: 50px;
+        height: 20px;
+        width: 20px;
+        border-radius: 5px;
+        margin: auto;
     }
 `
 
