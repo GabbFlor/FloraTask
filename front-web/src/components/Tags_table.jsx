@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const Tags_table = () => {
     const [tags, setTags] = useState([]);
@@ -48,8 +49,6 @@ const Tags_table = () => {
         atualizarTags();
     }, []);
 
-
-
     return(
         <table className='table-tarefas'>
             <thead>
@@ -66,7 +65,7 @@ const Tags_table = () => {
                     <tr key={tag.id}>
                         <th><input type="checkbox" value={"teste-filho"}  className='chekbox-line-table'  /></th>
                         <td>{tag.nome}</td>
-                        <td><div className='tag-color' style={{ backgroundColor: tag.color }}></div></td>
+                        <td><div className='tag-color-table' style={{ backgroundColor: tag.color }}></div></td>
                         <td>{tag.descricao}</td>
                         <td>
                             <nav>

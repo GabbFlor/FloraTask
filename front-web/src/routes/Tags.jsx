@@ -77,6 +77,8 @@ const Tags = () => {
                         setNome("")
                         setDescricao("")
                         setTagColor("#000000");
+
+                        window.location.href = '/tags';
                     })
                     .catch(error => {
                         if (error.response && error.response.status === 403) {
