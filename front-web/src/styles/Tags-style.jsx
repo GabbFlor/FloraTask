@@ -136,6 +136,17 @@ const Tags_style = createGlobalStyle `
         background-color: #00b061;
     }
 
+    .visualizar {
+        border: 2.5px solid #9F8500;
+        color: #9F8500;
+    }
+
+    .visualizar:hover {
+        border: 2.5px solid #c2a100;
+        color: white;
+        background-color: #c2a100;
+    }
+
     .tag-color {
         min-width: 50px;
         min-height: 50px;

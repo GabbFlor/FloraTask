@@ -1,22 +1,22 @@
 import { useParams } from "react-router-dom";
+import Edit_tag_form from "../components/Edit_tag_form";
 import Header from "../components/Header";
-import View_tag_form from "../components/View_tag_form";
 import View_tag_style from "../styles/View_tag_style";
 
-const View_tag = () => {
+const Edit_tag = () => {
     const { tagId } = useParams();
 
-    return (
-        <div className="Pagina_view_tag">
+    return(
+        <div className="Pagina-edit-tag">
             <View_tag_style />
 
-            <Header />
+            <Header />            
 
             <main>
-                <View_tag_form tagId={tagId}/>
+                <Edit_tag_form tagId={tagId} />
             </main>
         </div>
     )
 }
 
-export default View_tag;
+export default Edit_tag;

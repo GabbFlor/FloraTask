@@ -143,7 +143,8 @@ const Tags_table = () => {
                         <td>
                             <nav>
                                 <button className='btn delete' onClick={() => handleDeletarTag(tag.id, tag.nome)}>Deletar</button>
-                                <Link className='btn editar btn-a' to={`${tag.id}`}>Editar</Link>
+                                <Link className='btn editar btn-a' to={`/tags/edit/${tag.id}`}>Editar</Link>
+                                <Link className='btn visualizar btn-a' to={`${tag.id}`}>Visualizar</Link>
                             </nav>
                         </td>
                     </tr>

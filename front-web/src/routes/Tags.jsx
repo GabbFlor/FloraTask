@@ -78,27 +78,23 @@ const Tags = () => {
                         }
                     })
                     .then(() => {
-                        setNome("")
-                        setDescricao("")
-                        setTagColor("#000000");
-
                         window.location.href = '/tags';
                     })
-                    .catch(error => {
-                        if (error.response && error.response.status === 403) {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Erro!",
-                                text: `Você não tem permissão para adicionar tags!`,
-                                timer: 1500
-                            })
-                        } else {
-                            Swal.fire({
-                                icon: "error",
-                                title: "Erro!",
-                                text: `Erro interno no servidor: ${error.message}`,
-                            })
-                        }
+                }
+            })
+            .catch(error => {
+                if (error.response && error.response.status === 403) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro!",
+                        text: `Você não tem permissão para adicionar tags!`,
+                        timer: 1500
+                    })
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro!",
+                        text: `Erro interno no servidor: ${error.message}`,
                     })
                 }
             })

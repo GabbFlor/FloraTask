@@ -7,6 +7,7 @@ import Tags from './routes/Tags.jsx';
 import Login from './routes/Login.jsx';
 import Registro from './routes/Registro.jsx';
 import View_tag from './routes/View_tag.jsx';
+import Edit_tag from './routes/Edit_Tag.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const routes = createBrowserRouter([
       {
         path: "/tags/:tagId",
         element: <View_tag />
+      },
+      {
+        path: "/tags/edit/:tagId",
+        element: <Edit_tag />
       },
       {
         path: "/auth/login",
