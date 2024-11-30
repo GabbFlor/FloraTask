@@ -174,6 +174,14 @@ const Style_login_registro = createGlobalStyle `
     .escrita-auth {
         margin-bottom: 10px;
     }
+
+    .title_swal {
+        font-family: "Roboto", serif;
+    }
+
+    .text_swal {
+        font-family: "Roboto", serif;
+    }
 `
 
 export default Style_login_registro;

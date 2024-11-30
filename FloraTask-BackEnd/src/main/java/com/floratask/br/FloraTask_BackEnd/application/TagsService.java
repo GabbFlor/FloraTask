@@ -22,6 +22,12 @@ public class TagsService implements TagsUseCases {
     }
 
     @Override
+    public Tags getTagByIdAndUserId(String id, String userId) {
+        return repository.findByIdAndUserId(id, userId).orElseThrow(() ->
+                new NoSuchElementException("Tag com o id: " + id + " e id de usuário: " + userId + " não foi encontrada."));
+    }
+
+    @Override
     public List<Tags> getTagByUserId(String userId) {
         return repository.findByUserId(userId);
     }

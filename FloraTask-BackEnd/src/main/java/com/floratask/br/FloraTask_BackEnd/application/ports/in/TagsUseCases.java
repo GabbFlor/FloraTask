@@ -7,6 +7,8 @@ import java.util.List;
 public interface TagsUseCases {
     Tags getOneTag(String id);
 
+    Tags getTagByIdAndUserId(String id, String userId);
+
     List<Tags> getTagByUserId(String userId);
 
     Tags PostTag(Tags tags);

@@ -34,7 +34,11 @@ const Form_login = () => {
                         icon: "success",
                         title: "Sucesso",
                         text: `Seja bem vindo ao FloraTask!`,
-                        timer: 1500
+                        timer: 1500,
+                        customClass: {
+                            title: "title_swal",
+                            text: "text_swal"
+                        }
                     })
                     .then(() => {
                         const token = response.data.token;

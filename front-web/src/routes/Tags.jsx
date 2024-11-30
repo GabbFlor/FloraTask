@@ -71,7 +71,11 @@ const Tags = () => {
                         icon: "success",
                         title: "Sucesso!",
                         text: `A tag "${nome}" foi adicionada com sucesso!`,
-                        timer: 1500
+                        timer: 1500,
+                        customClass: {
+                            title: "title_swal",
+                            text: "text_swal"
+                        }
                     })
                     .then(() => {
                         setNome("")

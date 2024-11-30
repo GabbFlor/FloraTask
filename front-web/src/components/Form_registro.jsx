@@ -64,7 +64,11 @@ const Form_registro = () => {
                         icon: "success",
                         title: "Sucesso",
                         text: `Bem vindo ${nome}`,
-                        timer: 1500
+                        timer: 1500,
+                        customClass: {
+                            title: "title_swal",
+                            text: "text_swal"
+                        }
                     })
                     .then(() => {
                         const token = response.data.token;

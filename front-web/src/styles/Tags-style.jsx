@@ -146,6 +146,25 @@ const Tags_style = createGlobalStyle `
         width: 20px;
         border-radius: 5px;
     }
+    
+    .td-color-tag {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .title_swal {
+        font-family: "Roboto", serif;
+    }
+
+    .text_swal {
+        font-family: "Roboto", serif;
+    }
+
+    .btn-a {
+        text-decoration: none;
+    }
 `
 
 export default Tags_style;

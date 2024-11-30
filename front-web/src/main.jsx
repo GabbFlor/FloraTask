@@ -6,6 +6,7 @@ import Tarefas from './routes/Tarefas.jsx';
 import Tags from './routes/Tags.jsx';
 import Login from './routes/Login.jsx';
 import Registro from './routes/Registro.jsx';
+import View_tag from './routes/View_tag.jsx';
 
 const routes = createBrowserRouter([
   {
@@ -25,13 +26,17 @@ const routes = createBrowserRouter([
         element: <Tags />
       },
       {
+        path: "/tags/:tagId",
+        element: <View_tag />
+      },
+      {
         path: "/auth/login",
         element: <Login />
       },
       {
         path: "/auth/registro",
         element: <Registro />
-      }
+      },
     ]
   }
 ])

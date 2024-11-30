@@ -22,6 +22,11 @@ public class TagsRepositoryImp implements TagsRepository {
     }
 
     @Override
+    public Optional<Tags> findByIdAndUserId(String id, String userId) {
+        return tagsJpaRepository.findByIdAndUserId(id, userId).map(this::toDomain);
+    }
+
+    @Override
     public List<Tags> findByUserId(String userId) {
         return tagsJpaRepository.findByUserId(userId).stream().map(this::toDomain).collect(Collectors.toList());
     }

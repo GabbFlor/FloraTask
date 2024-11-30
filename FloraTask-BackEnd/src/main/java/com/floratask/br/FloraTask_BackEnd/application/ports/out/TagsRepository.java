@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface TagsRepository {
     Optional<Tags> findById(String id);
 
+    Optional<Tags> findByIdAndUserId(String id, String userId);
+
     List<Tags> findByUserId(String userId);
 
     Tags save(Tags tags);

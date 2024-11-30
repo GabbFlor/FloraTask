@@ -32,10 +32,10 @@ public class TagsController {
         }
     }
 
-    @GetMapping("/getTagById/{id}")
-    public ResponseEntity<?> pegarTagPorId(@PathVariable(value = "id") String id) {
+    @GetMapping("/getTagById/{id}/{userId}")
+    public ResponseEntity<?> pegarTagPorId(@PathVariable(value = "id") String id, @PathVariable(value = "userId") String userId) {
         try {
-            Tags tags = tagsUseCases.getOneTag(id);
+            Tags tags = tagsUseCases.getTagByIdAndUserId(id, userId);
             return ResponseEntity.status(HttpStatus.OK).body(tags);
         } catch (NoSuchElementException e) {
             Map<String, String> errorResponse = new HashMap<>();
