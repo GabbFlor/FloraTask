@@ -38,6 +38,11 @@ public class TarefaService implements TarefaUseCases {
 
     @Override
     public Tarefa postTarefa(Tarefa tarefa) {
+        if (tarefa.getTags() == null) {
+            System.out.println("Id da tag (É NULO):" + tarefa.getTags());
+            tarefa.setTags(null);
+            return tarefaRepository.saveTarefaNonTagId(tarefa);
+        }
         return tarefaRepository.save(tarefa);
     }
 

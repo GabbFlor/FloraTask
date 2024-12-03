@@ -121,6 +121,18 @@ const Style_pop_up_tarefa = createGlobalStyle `
         cursor: pointer;
     }
 
+    .buttons-dropdown-options {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0 !important;
+        align-items: center;
+        // background-color: red;
+    }
+    
+    .X-icon {
+        font-size: 20px
+    }
+
     .dropdown-menu {
         background-color: #D5D5D5;
         position: absolute;

@@ -93,10 +93,6 @@ const Edit_tag_form = ({ tagId }) => {
                         text: `A tag "${nome}" foi editada com sucesso!`,
                         timer: 1000,
                         showConfirmButton: false,
-                        customClass: {
-                            title: "title_swal",
-                            text: "text_swal"
-                        }
                     })
                     .then(() => {
                         window.location.href = '/tags';
@@ -110,10 +106,6 @@ const Edit_tag_form = ({ tagId }) => {
                         title: "Erro!",
                         text: `Você não tem permissão para adicionar tags!`,
                         timer: 1500,
-                        customClass: {
-                            title: "title_swal",
-                            text: "text_swal"
-                        }
                     })
                 } else if (error.response && error.response.status === 422) {
                     Swal.fire({
@@ -121,20 +113,12 @@ const Edit_tag_form = ({ tagId }) => {
                         title: "Erro!",
                         text: `Algum dos campos ultrapassa o limite de caracteres`,
                         showConfirmButton: true,
-                        customClass: {
-                            title: "title_swal",
-                            text: "text_swal"
-                        }
                     })
                 } else {
                     Swal.fire({
                         icon: "error",
                         title: "Erro!",
                         text: `Erro interno no servidor: ${error.message}`,
-                        customClass: {
-                            title: "title_swal",
-                            text: "text_swal"
-                        }
                     })
                 }
             })

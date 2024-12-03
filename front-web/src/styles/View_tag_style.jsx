@@ -150,11 +150,11 @@ const View_tag_style = createGlobalStyle `
         height: 50px;
     }
 
-    .title_swal {
+    .swal2-title {
         font-family: "Roboto", serif;
     }
 
-    .text_swal {
+    .swal2-html-container {
         font-family: "Roboto", serif;
     }
 `

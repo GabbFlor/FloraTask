@@ -165,11 +165,11 @@ const Tags_style = createGlobalStyle `
         width: 100%;
     }
 
-    .title_swal {
+    .swal2-title {
         font-family: "Roboto", serif;
     }
 
-    .text_swal {
+    .swal2-html-container {
         font-family: "Roboto", serif;
     }
 

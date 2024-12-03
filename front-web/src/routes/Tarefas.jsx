@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Home_tasks from "../components/Home_tasks";
 import Style_tarefas from "../styles/Tarefas-style";
-import { BsSearch, BsFunnel, BsCaretDownFill } from "react-icons/bs"
+import { BsSearch, BsFunnel, BsCaretDownFill, BsX } from "react-icons/bs"
 import Swal from 'sweetalert2'
 import Modal from "react-modal";
 import Style_pop_up_tarefa from "../styles/Pop-up-tarefa-style";
+import axios from "axios";
 
 Modal.setAppElement("#root");
 
@@ -14,40 +15,142 @@ const Tarefas = () => {
     const [detalhes, setDetalhes] = useState("");
     const [tags, setTags] = useState(null);
     const [prazo, setPrazo] = useState("");
-    const [img, setImg] = useState(null);
     const [formIsOpen, setFormIsOpen] = useState(false);
     const [dropdownAberto, setDropdownAberto] = useState(false);
     const [tagSelecionadas, setTagsSelecionadas] = useState("Selecione uma tag:");
-
+    const [idUser, setIdUser] = useState("");
+    const [tagOptions, setTagOptions] = useState([]);
     const openModal = () => setFormIsOpen(true);
     const closeModal = () => setFormIsOpen(false);
+
+    const recuperarIdDoUser = async () => {
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = await axios.get("http://localhost:8080/auth/info", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 200) {
+                setIdUser(response.data.id);
+            }
+        } catch (error) {
+            if (error.response.status === 403) {
+                window.location.href = "/auth/login";
+            } else {
+                console.error(`Ocorreu um erro desconhecido: ${error.message}`);
+            }
+        }
+    }
+
+    useEffect(() => {
+        recuperarIdDoUser();
+    }, []);
+
+    const atualizarTags = async () => {
+        if (!idUser) return;
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await axios.get(`http://localhost:8080/tags/getByUserId/${idUser}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (response.status === 200) {
+                setTagOptions(response.data);
+            }
+        } catch (error) {
+            if (error.response.status === 403) {
+                console.error("Você não tem permissão para acessar as tags.");
+            } else {
+                console.error(`Erro ao atualizar tags: ${error.message}`);
+            }
+        }
+    }
+
+    useEffect(() => {
+        atualizarTags();
+    }, [idUser])
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (nome && detalhes && prazo != "") {
-            console.log(`Nome: ${nome}`)
-            console.log(`detalhes: ${detalhes}`)
-            console.log(`tags: ${tags}`)
-            console.log(`prazo: ${prazo}`)
+            const token = localStorage.getItem("token");
 
-            setNome("")
-            setDetalhes("")
-            setTags(null)
-            setPrazo("")
-            setTagsSelecionadas("Selecione uma tag:")
-
-            closeModal();
+            axios.post("http://localhost:8080/tarefa", {
+                    nome: nome,
+                    detalhes: detalhes,
+                    tags: {
+                        id: tags
+                    },
+                    userId: idUser,
+                    prazo: prazo
+                }, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            .then(response => {
+                if (response.status === 201) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Sucesso!",
+                        text: `A tarefa "${nome}" foi adicionada com sucesso!`,
+                        timer: 1500,
+                        showConfirmButton: false
+                    })
+                    .then(() => {
+                        console.log(tags);
+                        // window.location.href = '/';
+                    })
+                }
+            })
+            .catch(error => {
+                if (error.response.status === 403) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro!",
+                        text: `Você não tem permissão para adicionar tarefas!`,
+                        timer: 1500
+                    })
+                    .then(() => {
+                        closeModal();
+                    })
+                } else if (error.response && error.response.status === 422) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro!",
+                        text: `Algum dos campos inseridos ultrapassa o limites de caracteres (255 caracteres).`,
+                        showConfirmButton: true
+                    })
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro!",
+                        text: `Erro interno no servidor: ${error.message}`
+                    })
+                    .then(() => {
+                        closeModal();
+                    })
+                }
+            })
         } else {
             console.error("Não tente alterar o HTML para enviar valores vazios!")
         }
     }
 
-    const tagOptions = [
-        { label: "Nenhuma", color: null, value: null },
-        { id:"1", label: "Programação", color: "red", value: "programacao" },
-        { id:"2", label: "Dormir", color: "yellow", value: "dormir" },
-    ]
+    const limparTags = () => {
+        setTags(null);
+        setTagsSelecionadas("Selecione uma tag:")
+    }
 
     return (
         <div className="Pagina-Tarefas">
@@ -118,20 +221,27 @@ const Tarefas = () => {
                             <button type="button" className="button-dropdown" onClick={() => setDropdownAberto((prev) => !prev)}>
                                 {tagSelecionadas}
 
-                                <BsCaretDownFill />
+                                <div className="buttons-dropdown-options">
+                                    <BsX className="X-icon" title="Limpar tag" onClick={(e) => {
+                                        // serve para executar apenas o do btn X, sem executar o do btn dropdown
+                                        e.stopPropagation();
+                                        limparTags();
+                                    }}/>
+                                    <BsCaretDownFill title="Abrir menu de tags"/>
+                                </div>
                             </button>
 
                             {dropdownAberto && (
                                 <section className="dropdown-menu">
-                                    {tagOptions.map((option) => (
-                                        <div key={option.value} className="dropdown-line" onClick={() => {
+                                    {tagOptions.map((tag) => (
+                                        <div key={tag.id} className="dropdown-line" onClick={() => {
                                             setDropdownAberto(false);
-                                            setTagsSelecionadas(option.label);
-                                            setTags(option.value);
+                                            setTagsSelecionadas(tag.nome);
+                                            setTags(tag.id);
                                         }}
                                         >
-                                            <div className="tag-color" style={{backgroundColor: option.color}}></div>
-                                            <div>{option.label}</div>
+                                            <div className="tag-color" style={{backgroundColor: tag.color}}></div>
+                                            <div>{tag.nome}</div>
                                         </div>
                                     ))}
                                 </section>
@@ -149,16 +259,6 @@ const Tarefas = () => {
                                 onChange={(e) => setPrazo(e.target.value)} 
                             />
                         </div>
-                        <div>
-                            <label htmlFor="img">Imagem:</label>
-                            <input 
-                                type="file" 
-                                className="input img"
-                                placeholder="Digite aqui..." 
-                                name="img"
-                            />
-                        </div>
-                        
                         <div className="div-buttons">
                             <button className="btn deletar btn-style-table" onClick={() => closeModal()}>Cancelar</button>
                             <button className="btn concluir btn-style-table">Adicionar</button>

@@ -175,11 +175,11 @@ const Style_login_registro = createGlobalStyle `
         margin-bottom: 10px;
     }
 
-    .title_swal {
+    .swal2-title {
         font-family: "Roboto", serif;
     }
 
-    .text_swal {
+    .swal2-html-container {
         font-family: "Roboto", serif;
     }
 `

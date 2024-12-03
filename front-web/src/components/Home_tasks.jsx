@@ -157,7 +157,7 @@ const Home_tasks = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {tarefasCompletas.map(tarefa => (
+                                    {tarefasIncompletas.map(tarefa => (
                                         <tr key={tarefa.id}>
                                             <th><input type="checkbox" value={"teste-filho"}  className='chekbox-line-table'  /></th>
                                             <td>{tarefa.nome}</td>
@@ -204,7 +204,7 @@ const Home_tasks = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {tarefasIncompletas.map(tarefa => (
+                                    {tarefasCompletas.map(tarefa => (
                                         <tr key={tarefa.id}>
                                             <th><input type="checkbox" value={"teste-filho"}  className='chekbox-line-table'  /></th>
                                             <td>{tarefa.nome}</td>

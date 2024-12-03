@@ -25,7 +25,7 @@ public class TarefaEntity {
     @Column(name = "detalhes", nullable = false)
     private String detalhes;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     @JoinColumn(name = "tag_id", nullable = true)
     private TagsEntity tags;
 
