@@ -73,13 +73,23 @@ const View_tag_style = createGlobalStyle `
         padding: 7.5px;
         border-radius: 5px;
         color: black;
+        font-family: "Roboto", serif;
+        font-size: 0.85rem;
+    }
+
+    form textarea {
+        border-radius: 0;
     }
 
     form textarea {
         resize: none;
         overflow: auto;
         height: 15vh;
-        font-size: 15px;
+    }
+
+    .caracters-count {
+        font-size: 0.825rem;
+        font-weight: 500;
     }
 
     .btn {

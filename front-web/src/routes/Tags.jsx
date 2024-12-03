@@ -14,7 +14,8 @@ const Tags = () => {
     const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
     const [tagColor, setTagColor] = useState("#000000");
-    const [userInfo, setUserInfo] = useState([])
+    const [userInfo, setUserInfo] = useState([]);
+    const [caracteres, setCaracteres] = useState(0);
 
     const openModal = () => setFormIsOpen(true);
     const closeModal = () => setFormIsOpen(false);
@@ -90,15 +91,27 @@ const Tags = () => {
                         text: `Você não tem permissão para adicionar tags!`,
                         timer: 1500
                     })
+                    .then(() => {
+                        closeModal();
+                    })
+                } else if (error.response && error.response.status === 422) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro!",
+                        text: `Algum dos campos inseridos ultrapassa o limites de caracteres (255 caracteres).`,
+                        showConfirmButton: true
+                    })
                 } else {
                     Swal.fire({
                         icon: "error",
                         title: "Erro!",
-                        text: `Erro interno no servidor: ${error.message}`,
+                        text: `Erro interno no servidor: ${error.message}`
+                    })
+                    .then(() => {
+                        closeModal();
                     })
                 }
             })
-            closeModal();
         } else {
             console.error("Não tente alterar o HTML para enviar valores vazios!")
         }
@@ -129,7 +142,7 @@ const Tags = () => {
 
                     <form action="" onSubmit={HandleSubmit}>
                         <div>
-                            <label htmlFor="nome">Nome da tag:</label>
+                            <label htmlFor="nome">Nome:</label>
                             <input 
                                 type="text" 
                                 className="input name"
@@ -150,13 +163,21 @@ const Tags = () => {
                                 name="nome"
                                 value={descricao}
                                 required
-                                onChange={(e) => setDescricao(e.target.value)}
+                                onChange={(e) => {
+                                    setDescricao(e.target.value);
+                                    setCaracteres(e.target.value.length);
+                                }}
                                 style={{height: "50px"}}
                             />
+                            {caracteres <= 255 ? (
+                                <p className="caracters-count" style={{ color: "#6A6A6A" }}>{caracteres}/255 caracteres.</p>
+                            ) : (
+                                <p className="caracters-count" style={{ color: "red" }}>{caracteres}/255 caracteres.</p>
+                            )}
                         </div>
 
                         <div>
-                            <label htmlFor="tag-color">Cor da tag:</label>
+                            <label htmlFor="tag-color">Cor:</label>
                             <input 
                                 type="color" 
                                 className="input tag-color"

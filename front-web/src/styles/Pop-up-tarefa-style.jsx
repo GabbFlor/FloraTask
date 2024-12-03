@@ -58,12 +58,11 @@ const Style_pop_up_tarefa = createGlobalStyle `
 
     .custom-style-form-pop-up form div textarea {
         resize: none;
-        height: 110px;
+        height: 15vh !important;
         background-color: #D5D5D5;
         border: none;
         outline: none;
         padding: 7.5px;
-        border-radius: 5px;
         font-family: "Roboto", serif;
     }
 
@@ -74,6 +73,12 @@ const Style_pop_up_tarefa = createGlobalStyle `
         padding: 7.5px;
         border-radius: 5px;
         color: black;
+        font-size: 0.825rem;
+    }
+
+    .caracters-count {
+        font-size: 0.825rem;
+        font-weight: 500;
     }
     
     .custom-style-form-pop-up form div select {

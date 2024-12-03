@@ -8,6 +8,7 @@ const Edit_tag_form = ({ tagId }) => {
     const [nome, setNome] = useState("");
     const [descricao, setDescricao] = useState("");
     const [color, setColor] = useState("#000000");
+    const [caracteres, setCaracteres] = useState(0);
 
     const recuperarIdDoUser = async () => {
         const token = localStorage.getItem("token");
@@ -114,6 +115,17 @@ const Edit_tag_form = ({ tagId }) => {
                             text: "text_swal"
                         }
                     })
+                } else if (error.response && error.response.status === 422) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro!",
+                        text: `Algum dos campos ultrapassa o limite de caracteres`,
+                        showConfirmButton: true,
+                        customClass: {
+                            title: "title_swal",
+                            text: "text_swal"
+                        }
+                    })
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -150,8 +162,16 @@ const Edit_tag_form = ({ tagId }) => {
                     type="text" 
                     value={descricao} 
                     required
-                    onChange={(e) => setDescricao(e.target.value)}
+                    onChange={(e) => {
+                        setDescricao(e.target.value);
+                        setCaracteres(e.target.value.length);
+                    }}
                 />
+                {caracteres <= 255 ? (
+                    <p className="caracters-count" style={{ color: "#6A6A6A" }}>{caracteres}/255 caracteres.</p>
+                ) : (
+                    <p className="caracters-count" style={{ color: "red" }}>{caracteres}/255 caracteres.</p>
+                )}
             </div>
             <div>
                 <label htmlFor="cor">Cor:</label>

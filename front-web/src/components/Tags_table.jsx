@@ -139,7 +139,8 @@ const Tags_table = () => {
                         <th><input type="checkbox" value={"teste-filho"}  className='chekbox-line-table'  /></th>
                         <td>{tag.nome}</td>
                         <td className="td-color-tag"><div className='tag-color-table' style={{ backgroundColor: tag.color }}></div></td>
-                        <td>{tag.descricao}</td>
+                        {/* rolê para imprimir apenas os 25 primeiros caracteres da descrição da tag */}
+                        <td>{tag.descricao.length > 50 ? (`${tag.descricao.slice(0, 25)}...`) : tag.descricao}</td>
                         <td>
                             <nav>
                                 <button className='btn delete' onClick={() => handleDeletarTag(tag.id, tag.nome)}>Deletar</button>

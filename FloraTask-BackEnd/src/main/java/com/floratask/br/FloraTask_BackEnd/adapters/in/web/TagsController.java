@@ -2,11 +2,14 @@ package com.floratask.br.FloraTask_BackEnd.adapters.in.web;
 
 import com.floratask.br.FloraTask_BackEnd.application.domain.Tags;
 import com.floratask.br.FloraTask_BackEnd.application.ports.in.TagsUseCases;
+import com.mysql.cj.exceptions.DataTruncationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.DataTruncation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +28,10 @@ public class TagsController {
         try {
             Tags resultado = tagsUseCases.PostTag(tags);
             return ResponseEntity.status(HttpStatus.CREATED).body(tags);
+        } catch (DataIntegrityViolationException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("Mensagem: ", "Algum dos campos inseridos estoura o limite de caracteres!");
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorResponse);
         } catch (Exception e) {
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("Mensagem: ", "Erro interno no servidor: " + e.getMessage());
@@ -72,6 +79,10 @@ public class TagsController {
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("Mensagem: ", e.getMessage());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        } catch (DataIntegrityViolationException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("Mensagem: ", "Algum dos campos inseridos estoura o limite de caracteres!");
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorResponse);
         } catch (Exception e) {
             Map<String, String> errorResponse = new HashMap<>();
             errorResponse.put("Mensagem: ", "Erro interno no servidor: " + e.getMessage());
