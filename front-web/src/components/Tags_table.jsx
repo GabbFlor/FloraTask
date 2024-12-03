@@ -140,7 +140,7 @@ const Tags_table = () => {
                         <td>{tag.nome}</td>
                         <td className="td-color-tag"><div className='tag-color-table' style={{ backgroundColor: tag.color }}></div></td>
                         {/* rolê para imprimir apenas os 25 primeiros caracteres da descrição da tag */}
-                        <td>{tag.descricao.length > 50 ? (`${tag.descricao.slice(0, 25)}...`) : tag.descricao}</td>
+                        <td>{tag.descricao.length > 30 ? (`${tag.descricao.slice(0, 30)}...`) : tag.descricao}</td>
                         <td>
                             <nav>
                                 <button className='btn delete' onClick={() => handleDeletarTag(tag.id, tag.nome)}>Deletar</button>
