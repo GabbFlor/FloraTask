@@ -1,5 +1,7 @@
 package com.floratask.br.FloraTask_BackEnd.application;
 
+import com.floratask.br.FloraTask_BackEnd.adapters.out.persistense.TagsEntity;
+import com.floratask.br.FloraTask_BackEnd.adapters.out.persistense.TagsJpaRepository;
 import com.floratask.br.FloraTask_BackEnd.application.domain.Tarefa;
 import com.floratask.br.FloraTask_BackEnd.application.ports.in.TarefaUseCases;
 import com.floratask.br.FloraTask_BackEnd.application.ports.out.TarefaRepository;
@@ -14,6 +16,9 @@ public class TarefaService implements TarefaUseCases {
 
     @Autowired
     private TarefaRepository tarefaRepository;
+
+    @Autowired
+    private TagsJpaRepository tagsJpaRepository;
 
     @Override
     public Tarefa getTarefaById(String id) {
@@ -38,11 +43,15 @@ public class TarefaService implements TarefaUseCases {
 
     @Override
     public Tarefa postTarefa(Tarefa tarefa) {
-        if (tarefa.getTags() == null) {
-            System.out.println("Id da tag (É NULO):" + tarefa.getTags());
+        if (tarefa.getTags() == null || tarefa.getTags().getId() == null) {
+            System.out.println("A tarefa não possui tag associada ou o ID da tag é nulo.");
             tarefa.setTags(null);
-            return tarefaRepository.saveTarefaNonTagId(tarefa);
+        } else {
+            TagsEntity tagExistente = tagsJpaRepository.findById(tarefa.getTags().getId())
+                    .orElseThrow(() -> new RuntimeException("Tag não encontrada"));
+            tarefa.setTags(tagExistente);
         }
+
         return tarefaRepository.save(tarefa);
     }
 

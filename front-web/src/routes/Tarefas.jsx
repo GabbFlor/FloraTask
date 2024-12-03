@@ -108,8 +108,7 @@ const Tarefas = () => {
                         showConfirmButton: false
                     })
                     .then(() => {
-                        console.log(tags);
-                        // window.location.href = '/';
+                        window.location.href = '/';
                     })
                 }
             })

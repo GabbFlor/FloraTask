@@ -43,50 +43,8 @@ public class TarefaRepositoryImp implements TarefaRepository {
     }
 
     @Override
-    public Tarefa saveTarefaNonTagId(Tarefa tarefa) {
-        TarefaEntity tarefaEntity = toEntityNonTagId(tarefa);
-        return toDomain(tarefaJpaRepository.save(tarefaEntity));
-    }
-
-    @Override
     public void deleteById(String id) {
         tarefaJpaRepository.deleteById(id);
-    }
-
-    private Tarefa ToDomainNonId(TarefaEntity entity) {
-        Tarefa tarefa = new Tarefa();
-        tarefa.setId(entity.getId());
-        tarefa.setNome(entity.getNome());
-        tarefa.setDetalhes(entity.getDetalhes());
-        tarefa.setTags(null);
-        tarefa.setUserId(entity.getUserId());
-        tarefa.setPrazo(entity.getPrazo());
-        tarefa.setIsCompleted(entity.getIsCompleted());
-//        campo para verificar o valor de "criado_em" e evitar NullPointerException
-        if (entity.getCriado_em() != null) {
-            tarefa.setCriado_em(String.valueOf(entity.getCriado_em()));
-        }
-        return tarefa;
-    }
-    private TarefaEntity toEntityNonTagId(Tarefa tarefa) {
-        TarefaEntity entity = new TarefaEntity();
-        entity.setId(tarefa.getId());
-        entity.setNome(tarefa.getNome());
-        entity.setDetalhes(tarefa.getDetalhes());
-        entity.setTags(null);
-        entity.setUserId(tarefa.getUserId());
-        entity.setPrazo(tarefa.getPrazo());
-        entity.setIsCompleted(tarefa.getIsCompleted());
-//        campo para verificar o valor de "criado_em" e evitar NullPointerException
-        if (tarefa.getCriado_em() != null && tarefa.getCriado_em().isEmpty()) {
-            try {
-                entity.setCriado_em(LocalDateTime.parse(tarefa.getCriado_em()));
-            } catch (Exception e) {
-                System.err.println("Erro ao converter 'criado_em' para LocalDateTime: " + e.getMessage());
-                entity.setCriado_em(null);
-            }
-        }
-        return entity;
     }
 
     private Tarefa toDomain(TarefaEntity entity) {
@@ -109,7 +67,15 @@ public class TarefaRepositoryImp implements TarefaRepository {
         entity.setId(tarefa.getId());
         entity.setNome(tarefa.getNome());
         entity.setDetalhes(tarefa.getDetalhes());
-        entity.setTags(tarefa.getTags());
+
+        if (tarefa.getTags() != null) {
+            TagsEntity tagsEntity = new TagsEntity();
+            tagsEntity.setId(tarefa.getTags().getId());
+            entity.setTags(tagsEntity);
+        } else {
+            entity.setTags(null);
+        }
+
         entity.setUserId(tarefa.getUserId());
         entity.setPrazo(tarefa.getPrazo());
         entity.setIsCompleted(tarefa.getIsCompleted());

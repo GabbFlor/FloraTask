@@ -162,8 +162,12 @@ const Home_tasks = () => {
                                             <th><input type="checkbox" value={"teste-filho"}  className='chekbox-line-table'  /></th>
                                             <td>{tarefa.nome}</td>
                                             <td className='tag-td'>
-                                                <div className='tag-color' style={{ backgroundColor: tarefa.tags.color }}></div>
-                                                {tarefa.tags.nome}
+                                                {tarefa.tags != null ? (
+                                                    <div className='tag-color' style={{ backgroundColor: tarefa.tags.color }}></div>
+                                                ) : (
+                                                    ""
+                                                )}
+                                                {tarefa.tags != null ? (tarefa.tags.nome) : ("Nenhuma tag adicionada.")}
                                             </td>
                                             <td>
                                                 <nav>
@@ -172,14 +176,27 @@ const Home_tasks = () => {
                                                     <button className='btn editar btn-style-table'>Editar</button>
                                                     <button 
                                                         className='btn visualizar btn-style-table' 
-                                                        onClick={() => handleVisualizarTarefa(
-                                                            tarefa.nome,
-                                                            tarefa.detalhes,
-                                                            tarefa.tags.nome,
-                                                            tarefa.tags.color,
-                                                            tarefa.prazo,
-                                                            tarefa.criado_em
-                                                        )}
+                                                        onClick={() => {
+                                                            tarefa.tags != null ? (
+                                                                handleVisualizarTarefa(
+                                                                    tarefa.nome,
+                                                                    tarefa.detalhes,
+                                                                    tarefa.tags.nome,
+                                                                    tarefa.tags.color,
+                                                                    tarefa.prazo,
+                                                                    tarefa.criado_em
+                                                                )
+                                                            ) : (
+                                                                handleVisualizarTarefa(
+                                                                    tarefa.nome,
+                                                                    tarefa.detalhes,
+                                                                    "Nenhuma tag adicionada.",
+                                                                    "#000000",
+                                                                    tarefa.prazo,
+                                                                    tarefa.criado_em
+                                                                )
+                                                            )
+                                                        }}
                                                     >Visualizar</button>
                                                 </nav>
                                             </td>
@@ -208,20 +225,41 @@ const Home_tasks = () => {
                                         <tr key={tarefa.id}>
                                             <th><input type="checkbox" value={"teste-filho"}  className='chekbox-line-table'  /></th>
                                             <td>{tarefa.nome}</td>
-                                            <td>{tarefa.tags.nome}</td>
+                                            <td className='tag-td'>
+                                                {tarefa.tags != null ? (
+                                                    <div className='tag-color' style={{ backgroundColor: tarefa.tags.color }}></div>
+                                                ) : (
+                                                    ""
+                                                )}
+                                                {tarefa.tags != null ? (tarefa.tags.nome) : ("nenhuma tag adicionada.")}
+                                            </td>
                                             <td>
                                                 <nav>
                                                     <button className='btn deletar btn-style-table'>Deletar</button>
                                                     <button 
                                                         className='btn visualizar btn-style-table'
-                                                        onClick={() => handleVisualizarTarefa(
-                                                            tarefa.nome,
-                                                            tarefa.detalhes,
-                                                            tarefa.tags.nome,
-                                                            tarefa.tags.color,
-                                                            tarefa.prazo,
-                                                            tarefa.criado_em
-                                                        )}
+                                                        title="visualizar a tarefa"
+                                                        onClick={() => {
+                                                            tarefa.tags != null ? (
+                                                                handleVisualizarTarefa(
+                                                                    tarefa.nome,
+                                                                    tarefa.detalhes,
+                                                                    tarefa.tags.nome,
+                                                                    tarefa.tags.color,
+                                                                    tarefa.prazo,
+                                                                    tarefa.criado_em
+                                                                )
+                                                            ) : (
+                                                                handleVisualizarTarefa(
+                                                                    tarefa.nome,
+                                                                    tarefa.detalhes,
+                                                                    "Nenhuma tag adicionada.",
+                                                                    "#000000",
+                                                                    tarefa.prazo,
+                                                                    tarefa.criado_em
+                                                                )
+                                                            )
+                                                        }}
                                                     >Visualizar</button>
                                                 </nav>
                                             </td>

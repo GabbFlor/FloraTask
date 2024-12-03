@@ -16,7 +16,5 @@ public interface TarefaRepository {
 
     Tarefa save(Tarefa tarefa);
 
-    Tarefa saveTarefaNonTagId(Tarefa tarefa);
-
     void deleteById(String id);
 }
